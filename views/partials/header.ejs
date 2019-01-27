@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--<link rel="stylesheet" href="/assets/css/custom.css">-->
     <title><%= title %></title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 </head>
 <style>
     .table-wrapper {
@@ -23,9 +27,41 @@
         margin-top: 50px;
     }
 </style>
+
 <body>
 <div class="page-wrapper">
     <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1" ><a href="/">Socka Players</a></span>
+        <span class="navbar-brand mb-0 h1" >
+            <a href="/">Socka Players</a>
+            <div id=clk class="float-right" style="margin-left:20px;font-family: serif;color: #007bff;" ></div>
+        </span>
         <a class="float-right" href="/add" title="Add a New Player">Add a Player</a>
     </nav>
+    <script>
+            clock();
+            function clock(){
+                // Interactiveness now
+                var clock = document.querySelector('#clk');
+                // But there is a little problem
+                // we need to pad 0-9 with an extra
+                // 0 on the left for hours, seconds, minutes
+                var pad = function(x) {
+                                return x < 10 ? '0'+x : x;
+                            };
+                var ticktock = function() {
+                                    var d = new Date();
+                                    
+                                    var h = pad( d.getHours() );
+                                    var m = pad( d.getMinutes() );
+                                    var s = pad( d.getSeconds() );
+                                    
+                                    var current_time = [h,m,s].join(':');
+                                    
+                                    clock.innerHTML = current_time;
+                                    
+                                };
+                ticktock();
+                // Calling ticktock() every 1 second
+                setInterval(ticktock, 1000);
+        }
+        </script>
